@@ -1,0 +1,24 @@
+services:
+
+  mariadb:
+    build: ./mariadb
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8000"
+    networks:
+      - inception-net
+    volumes:
+      - demo-data:/data
+
+  client:
+    image: busybox
+    command: ["sh", "-c", "sleep infinity"]
+    networks:
+      - inception-net
+
+networks:
+  inception-net:
+
+volumes:
+  demo-data:
