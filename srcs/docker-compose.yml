@@ -1,0 +1,5 @@
+services:
+  mariadb:
+
+  wordpress:
+    DB_HOST=mariadb:3306
