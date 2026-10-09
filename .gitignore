@@ -1,2 +1,4 @@
 srcs/.env
 secrets/
+.doc/
+test/
