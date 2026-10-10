@@ -1,7 +1,7 @@
 services:
   mariadb:
     build: requirements/mariadb
-    image: mariadb
+    image: mariadb:inception
     container_name: mariadb
     restart: unless-stopped          # redémarre après un crash (à comparer avec always / on-failure)
     env_file: .env

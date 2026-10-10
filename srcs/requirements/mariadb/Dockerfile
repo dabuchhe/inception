@@ -9,4 +9,10 @@ RUN apt-get update \
 RUN mkdir -p /run/mysqld \
     && chown mysql:mysql /run/mysqld
 
-CMD ["mariadbd", "--user=mysql", "--bind-address=0.0.0.0"]
+COPY tools/mariadb-entrypoint.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/mariadb-entrypoint.sh
+
+ENTRYPOINT ["mariadb-entrypoint.sh"]
+
+EXPOSE 3306
