@@ -1,0 +1,32 @@
+services:
+  mariadb:
+    build: requirements/mariadb
+    image: mariadb
+    container_name: mariadb
+    restart: unless-stopped          # redémarre après un crash (à comparer avec always / on-failure)
+    env_file: .env
+    secrets:
+      - db_password
+      - db_root_password
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/dabuchhe/data/mariadb
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
