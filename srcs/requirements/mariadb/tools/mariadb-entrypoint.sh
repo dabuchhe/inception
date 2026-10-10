@@ -35,3 +35,9 @@ fi
 
 # exec: mariadb replace shell and is now PID 1
 exec mariadbd --user=mysql --bind-address=0.0.0.0
+
+healthcheck:
+  test:["CMD", "mariadb-admin", "ping", "-h", "127.0.0.1", "--silent"]
+  interval: 5s
+  timeout: 3s
+  retries: 10
