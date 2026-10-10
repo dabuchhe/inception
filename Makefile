@@ -19,7 +19,6 @@ logs:
 clean:
 	$(COMPOSE) down --rmi all -v
 
-# TODO: check if sudo is allowed
 fclean: clean
 	sudo rm -rf $(DATA_DIR)
 
