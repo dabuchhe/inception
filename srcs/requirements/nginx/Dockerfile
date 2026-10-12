@@ -12,7 +12,8 @@ RUN mkdir -p /etc/nginx/ssl \
         -out /etc/nginx/ssl/inception.crt \
         -subj "/C=FR/L=Lyon/O=42/CN=dabuchhe.42.fr"
 
-RUN rm /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/sites-enabled/default \
+        /var/www/html/index.nginx-debian.html
 
 COPY conf/nginx.conf /etc/nginx/conf.d/inception.conf
 
