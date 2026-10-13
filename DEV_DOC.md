@@ -142,8 +142,9 @@ names: `mariadb`, `wordpress`, `nginx`. Images are `mariadb:inception`,
 2. Compose waits for the `mariadb` health check (`mariadb-admin ping`, every
    5 seconds, up to 10 tries).
 3. `wordpress` starts. Its entrypoint downloads WordPress if `wp-load.php` is
-   missing, creates `wp-config.php` if it is missing, and installs the site
-   and the two users if `wp core is-installed` fails. It then execs
+   missing, creates `wp-config.php` if it is missing, writes the database
+   host (`DB_HOST`) into it at each start, and installs the site and the two
+   users if `wp core is-installed` fails. It then execs
    `php-fpm8.2 -F`, which listens on port 9000.
 4. `nginx` starts and listens on 443.
 

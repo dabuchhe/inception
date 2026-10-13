@@ -7,13 +7,19 @@ DB_USER_PASSWORD=$(cat /run/secrets/db_user_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
 WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
 
+# Database host and port (must match the port mariadbd listens on)
+DB_HOST=mariadb:3306
+
 # Download WordPress if not present
 [ -f wp-load.php ] || wp core download --allow-root
 
 # Create wp-config.php if not present
 [ -f wp-config.php ] || wp config create --allow-root \
     --dbname="$MYSQL_DATABASE" --dbuser="$MYSQL_USER" \
-    --dbpass="$DB_USER_PASSWORD" --dbhost=mariadb:3306
+    --dbpass="$DB_USER_PASSWORD" --dbhost="$DB_HOST"
+
+# Rewrite the database host at each start, so a port change is applied
+wp config set DB_HOST "$DB_HOST" --allow-root
 
 # Install the website and create second user, only if not already set
 if ! wp core is-installed --allow-root; then
