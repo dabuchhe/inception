@@ -79,7 +79,7 @@ Passwords are in the `secrets/` directory, one password per file:
 |---------------------------------|-------------------------------------|
 | `secrets/wp_admin_password.txt` | WordPress administrator             |
 | `secrets/wp_user_password.txt`  | WordPress second user               |
-| `secrets/db_password.txt`       | Database user `MYSQL_USER`          |
+| `secrets/db_user_password.txt`       | Database user `MYSQL_USER`          |
 | `secrets/db_root_password.txt`  | Database `root` account             |
 
 To read a password:
@@ -138,5 +138,5 @@ Common problems:
 | `wordpress` restarts in a loop            | A variable is missing in `srcs/.env`. The logs name it.             |
 | `make` fails on a secret file             | A file is missing in `secrets/`.                                    |
 | The browser cannot find the site          | The `/etc/hosts` line is missing.                                   |
-| "Error establishing a database connection"| `mariadb` is not healthy, or `secrets/db_password.txt` was changed after installation. |
+| "Error establishing a database connection"| `mariadb` is not healthy, or `secrets/db_user_password.txt` was changed after installation. |
 | `make` fails on port 443                  | Another program on the host already uses port 443.                  |

@@ -76,14 +76,14 @@ the repository. Each file contains one password and nothing else.
 
 | File                            | Secret name         | Mounted in             |
 |---------------------------------|---------------------|------------------------|
-| `secrets/db_password.txt`       | `db_password`       | `mariadb`, `wordpress` |
+| `secrets/db_user_password.txt`       | `db_user_password`       | `mariadb`, `wordpress` |
 | `secrets/db_root_password.txt`  | `db_root_password`  | `mariadb`              |
 | `secrets/wp_admin_password.txt` | `wp_admin_password` | `wordpress`            |
 | `secrets/wp_user_password.txt`  | `wp_user_password`  | `wordpress`            |
 
 ```sh
 mkdir -p secrets
-for s in db_password db_root_password wp_admin_password wp_user_password; do
+for s in db_user_password db_root_password wp_admin_password wp_user_password; do
     openssl rand -hex 16 > "secrets/$s.txt"
 done
 chmod 600 secrets/*.txt
@@ -202,8 +202,8 @@ three places that hold it:
 ```sh
 docker exec -it mariadb mariadb -u root -p \
     -e "ALTER USER '<MYSQL_USER>'@'%' IDENTIFIED BY '<new password>';"
-docker exec wordpress wp config set DB_PASSWORD '<new password>' --allow-root
-printf '%s' '<new password>' > secrets/db_password.txt
+docker exec wordpress wp config set DB_USER_PASSWORD '<new password>' --allow-root
+printf '%s' '<new password>' > secrets/db_user_password.txt
 ```
 
 ## Where the data is stored and how it persists

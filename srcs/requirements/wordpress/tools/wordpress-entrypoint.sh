@@ -3,7 +3,7 @@
 set -eu
 
 # Secrets Docker: mounted in /run/secrets/<name declared in the compose>
-DB_PASSWORD=$(cat /run/secrets/db_password)
+DB_USER_PASSWORD=$(cat /run/secrets/db_user_password)
 WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
 WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
 
@@ -13,7 +13,7 @@ WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
 # Create wp-config.php if not present
 [ -f wp-config.php ] || wp config create --allow-root \
     --dbname="$MYSQL_DATABASE" --dbuser="$MYSQL_USER" \
-    --dbpass="$DB_PASSWORD" --dbhost=mariadb:3306
+    --dbpass="$DB_USER_PASSWORD" --dbhost=mariadb:3306
 
 # Install the website and create second user, only if not already set
 if ! wp core is-installed --allow-root; then
