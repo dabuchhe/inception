@@ -136,7 +136,7 @@ Common problems:
 | Symptom                                   | Likely cause                                                        |
 |-------------------------------------------|---------------------------------------------------------------------|
 | `wordpress` restarts in a loop            | A variable is missing in `srcs/.env`. The logs name it.             |
-| `make` fails on a secret file             | A file is missing in `secrets/`.                                    |
+| `make` stops on a secret file             | A file in `secrets/` is empty. Write its password in it.            |
 | The browser cannot find the site          | The `/etc/hosts` line is missing.                                   |
 | "Error establishing a database connection"| `mariadb` is not healthy, or `secrets/db_user_password.txt` was changed after installation. |
 | `make` fails on port 443                  | Another program on the host already uses port 443.                  |

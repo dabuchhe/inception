@@ -71,8 +71,9 @@ refuses two accounts with the same address.
 
 ### Secrets: `secrets/`
 
-This directory is ignored by git and must be created by hand, at the root of
-the repository. Each file contains one password and nothing else.
+This directory is ignored by git, at the root of the repository. `make`
+creates the four files empty when they are missing, then stops until each one
+is filled. Each file contains one password and nothing else.
 
 | File                            | Secret name         | Mounted in             |
 |---------------------------------|---------------------|------------------------|
@@ -202,7 +203,7 @@ three places that hold it:
 ```sh
 docker exec -it mariadb mariadb -u root -p \
     -e "ALTER USER '<MYSQL_USER>'@'%' IDENTIFIED BY '<new password>';"
-docker exec wordpress wp config set DB_USER_PASSWORD '<new password>' --allow-root
+docker exec wordpress wp config set DB_PASSWORD '<new password>' --allow-root
 printf '%s' '<new password>' > secrets/db_user_password.txt
 ```
 
